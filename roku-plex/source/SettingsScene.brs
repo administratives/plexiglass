@@ -1,4 +1,4 @@
-' SettingsScene controller: load/save Plex settings using settings_store.brs
+' SettingsScene controller: load/save Plex settings using settings_store.brs and verify registry persistence
 sub init()
   m.top = m.top
   m.serverField = m.top.findNode("serverField")
@@ -44,9 +44,19 @@ sub onSavePressed(event)
   }
   ok = SaveSettings(settings)
   if ok then
-    m.statusLabel.text = "Settings saved"
-    ' Close this scene to return to main
-    m.top.close = true
+    ' Verify by re-loading from registry
+    reloaded = LoadSettings()
+    if reloaded <> invalid and reloaded.plexServer = settings.plexServer then
+      m.statusLabel.text = "Settings saved to registry"
+      ' Close this scene to return to main
+      m.top.close = true
+      return
+    else
+      m.statusLabel.text = "Saved, but registry verification failed"
+      ' still close as tmp:/ fallback may exist
+      m.top.close = true
+      return
+    end if
   else
     m.statusLabel.text = "Failed to save settings"
   end if

@@ -1,5 +1,25 @@
-' Settings storage: saves to tmp:/roku-plex-config.txt (simple key=value format)
+' Settings storage: prefer RORegistrySection for persistence; fallback to tmp:/ file for older devices
 function LoadSettings() as Object
+  ' Try registry first
+  reg = CreateObject("roRegistrySection", "roku-plex")
+  if reg <> invalid then
+    server = reg.Read("plexServer", "")
+    port = reg.Read("plexPort", "")
+    token = reg.Read("plexToken", "")
+    if server <> "" or token <> "" then
+      settings = CreateObject("roAssociativeArray")
+      settings.plexServer = server
+      if port = "" or port = invalid then
+        settings.plexPort = 32400
+      else
+        settings.plexPort = Val(port)
+      end if
+      settings.plexToken = token
+      return settings
+    end if
+  end if
+
+  ' Fallback to tmp:/ file
   fs = CreateObject("roFileSystem")
   path = "tmp:/roku-plex-config.txt"
   if not fs.FileExists(path) then return invalid
@@ -25,11 +45,26 @@ end function
 
 function SaveSettings(settings as Object) as Boolean
   if settings = invalid then return false
+  success = true
+  ' Try registry first
+  reg = CreateObject("roRegistrySection", "roku-plex")
+  if reg <> invalid then
+    ok1 = reg.Write("plexServer", settings.plexServer)
+    ok2 = reg.Write("plexPort", str(settings.plexPort))
+    ok3 = reg.Write("plexToken", settings.plexToken)
+    success = success and ok1 and ok2 and ok3
+  else
+    success = false
+  end if
+
+  ' Also write tmp:/ fallback for compatibility
   fs = CreateObject("roFileSystem")
   path = "tmp:/roku-plex-config.txt"
   content = "plexServer=" + (settings.plexServer ? "") + "\n"
   content = content + "plexPort=" + str((settings.plexPort ? 32400)) + "\n"
   content = content + "plexToken=" + (settings.plexToken ? "") + "\n"
-  ok = fs.WriteAsciiFile(path, content)
-  return ok
+  okf = fs.WriteAsciiFile(path, content)
+  success = success and okf
+
+  return success
 end function
