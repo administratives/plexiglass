@@ -12,6 +12,9 @@
     <Button id="saveButton" translation="[360,230]" width="120" height="40" text="Save" />
     <Button id="cancelButton" translation="[500,230]" width="120" height="40" text="Cancel" />
     <Label id="statusLabel" translation="[20,290]" width="760" height="30" text="" />
+
+    <!-- List of libraries discovered during verification -->
+    <MarkupList id="librariesList" translation="[20,330]" width="760" height="240" />
   </children>
 
   <script uri="pkg:/roku-plex/source/SettingsScene.brs" />

@@ -8,6 +8,7 @@ sub init()
   m.saveButton = m.top.findNode("saveButton")
   m.cancelButton = m.top.findNode("cancelButton")
   m.statusLabel = m.top.findNode("statusLabel")
+  m.librariesList = m.top.findNode("librariesList")
 
   ' Observe button presses
   m.verifyButton.observeField("buttonSelected", "onVerifyPressed")
@@ -27,6 +28,9 @@ sub init()
     if m.portField <> invalid then m.portField.text = str(settings.plexPort)
     if m.tokenField <> invalid then m.tokenField.text = settings.plexToken
   end if
+
+  ' Hide libraries list initially
+  if m.librariesList <> invalid then m.librariesList.content = []
 end sub
 
 sub onVerifyPressed(event)
@@ -52,11 +56,14 @@ sub onVerifyPressed(event)
   if sections = invalid then
     m.statusLabel.text = "Verification failed: no response from server"
     m.lastVerificationPassed = false
+    ' clear list
+    if m.librariesList <> invalid then m.librariesList.content = []
     return
   end if
   if sections.Count() = 0 then
     m.statusLabel.text = "Verification failed: no libraries found (check token or server)"
     m.lastVerificationPassed = false
+    if m.librariesList <> invalid then m.librariesList.content = []
     return
   end if
 
@@ -66,6 +73,19 @@ sub onVerifyPressed(event)
   m.lastVerifiedServer = server
   m.lastVerifiedPort = port
   m.lastVerifiedToken = token
+
+  ' Populate the libraries list for user visibility
+  listContent = []
+  for each s in sections
+    title = s.title
+    kind = s.type
+    key = s.key
+    itemTitle = title
+    itemDesc = "Type: " + kind + "  Key: " + key
+    entry = { title: itemTitle, description: itemDesc, hdPosterUrl: "", content: { url: "" }, extras: { sectionKey: key, sectionType: kind } }
+    listContent.Push(entry)
+  end for
+  if m.librariesList <> invalid then m.librariesList.content = listContent
 end sub
 
 sub onSavePressed(event)
