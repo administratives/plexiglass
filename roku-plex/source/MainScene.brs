@@ -8,11 +8,19 @@ function init()
   ' Observe selection
   m.libraryGrid.ObserveField("itemFocused", "onItemFocused")
   m.libraryGrid.ObserveField("itemSelected", "onItemSelected")
+  m.settingsButton.observeField("buttonSelected", "onSettingsPressed")
 
   ' Load saved settings if available
-  m.plexServer = ""
-  m.plexPort = 32400
-  m.plexToken = ""
+  settings = LoadSettings()
+  if settings <> invalid then
+    m.plexServer = settings.plexServer
+    m.plexPort = settings.plexPort
+    m.plexToken = settings.plexToken
+  else
+    m.plexServer = ""
+    m.plexPort = 32400
+    m.plexToken = ""
+  end if
 
   ' If not configured, show prompt
   if m.plexServer = "" or m.plexToken = "" then
@@ -47,6 +55,7 @@ function init()
 end function
 
 sub onSettingsPressed(event)
+  ' open settings scene
   screen = CreateObject("roSGScreen")
   settingsScene = screen.CreateScene("SettingsScene")
   screen.Show()
