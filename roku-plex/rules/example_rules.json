@@ -1,0 +1,27 @@
+[
+  {
+    "id": "sci-fi-movies",
+    "name": "Sci-Fi Movies Channel",
+    "type": "movie",
+    "enabled": true,
+    "match": "any",
+    "filters": {
+      "genre": ["Science Fiction", "Sci-Fi"],
+      "collections": ["Star Wars", "Star Trek"],
+      "min_rating": 6
+    },
+    "sort": { "field": "year", "order": "desc" },
+    "limit": 200,
+    "refresh_interval_minutes": 1440
+  },
+  {
+    "id": "top-drama-series",
+    "name": "Top Drama Series",
+    "type": "show",
+    "enabled": true,
+    "match": "all",
+    "filters": { "genre": ["Drama"], "min_rating": 8 },
+    "sort": { "field": "rating", "order": "desc" },
+    "limit": 100
+  }
+]
