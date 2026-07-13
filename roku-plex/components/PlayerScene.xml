@@ -13,6 +13,8 @@
       loop="false"
       autoPlay="true" />
     <Label id="titleLabel" translation="[20,20]" width="1000" height="40" text="" />
+    <Label id="statusLabel" translation="[20,60]" width="1200" height="30" text="" />
+    <Label id="progressLabel" translation="[20,100]" width="1200" height="30" text="" />
   </children>
   <script uri="pkg:/roku-plex/source/PlayerScene.brs" />
 </component>
