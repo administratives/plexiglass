@@ -1,0 +1,8 @@
+title=Roku Plex
+subTitle=Stream your Plex metadata as channels
+major_version=1
+minor_version=0
+build_version=1.0.0
+mm_icon_default=pkg:/roku-plex/images/icon_default.png
+mm_icon_focus=pkg:/roku-plex/images/icon_focus.png
+splash_screen=pkg:/roku-plex/images/splash.png
