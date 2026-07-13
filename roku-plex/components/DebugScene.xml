@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component name="DebugScene" extends="Scene">
+  <children>
+    <Label id="title" translation="[20,20]" width="800" height="40" text="Debug & Diagnostics" />
+    <MarkupList id="debugList" translation="[20,80]" width="1200" height="600" />
+  </children>
+  <script uri="pkg:/roku-plex/source/DebugScene.brs" />
+</component>

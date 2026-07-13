@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component name="BackgroundTask" extends="Task">
+  <interface>
+    <field id="rulesFile" type="string" />
+    <field id="plexServer" type="string" />
+    <field id="plexPort" type="integer" />
+    <field id="plexToken" type="string" />
+    <field id="checkIntervalMinutes" type="integer" />
+  </interface>
+  <script uri="pkg:/roku-plex/source/background_task.brs" />
+</component>

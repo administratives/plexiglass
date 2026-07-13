@@ -12,7 +12,8 @@
     },
     "sort": { "field": "year", "order": "desc" },
     "limit": 200,
-    "refresh_interval_minutes": 1440
+    "refresh_interval_minutes": 1440,
+    "preferred_quality": "med"
   },
   {
     "id": "top-drama-series",
@@ -22,6 +23,7 @@
     "match": "all",
     "filters": { "genre": ["Drama"], "min_rating": 8 },
     "sort": { "field": "rating", "order": "desc" },
-    "limit": 100
+    "limit": 100,
+    "preferred_quality": "med"
   }
 ]

@@ -3,6 +3,7 @@
   <interface>
     <field id="contentUrl" type="string" />
     <field id="title" type="string" />
+    <field id="preferredQuality" type="string" />
   </interface>
   <children>
     <Video
@@ -12,9 +13,12 @@
       height="720"
       loop="false"
       autoPlay="true" />
-    <Label id="titleLabel" translation="[20,20]" width="1000" height="40" text="" />
-    <Label id="statusLabel" translation="[20,60]" width="1200" height="30" text="" />
-    <Label id="progressLabel" translation="[20,100]" width="1200" height="30" text="" />
+    <Rectangle id="osd" translation="[20,20]" width="1240" height="140" color="0x00000080" />
+    <Label id="titleLabel" translation="[40,30]" width="1000" height="30" text="" />
+    <Label id="statusLabel" translation="[40,60]" width="1000" height="24" text="" />
+    <Label id="progressLabel" translation="[40,90]" width="400" height="24" text="" />
+    <Label id="qualityLabel" translation="[460,90]" width="200" height="24" text="Quality: " />
+    <Button id="qualityToggle" translation="[660,86]" width="120" height="32" text="Toggle" />
   </children>
   <script uri="pkg:/roku-plex/source/PlayerScene.brs" />
 </component>
