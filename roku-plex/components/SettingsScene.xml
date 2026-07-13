@@ -8,9 +8,10 @@
     <TextField id="portField" translation="[220,130]" width="120" />
     <Label id="tokenLabel" translation="[20,180]" width="200" height="30" text="Plex Token:" />
     <TextField id="tokenField" translation="[220,180]" width="400" />
-    <Button id="saveButton" translation="[220,230]" width="120" height="40" text="Save" />
-    <Button id="cancelButton" translation="[360,230]" width="120" height="40" text="Cancel" />
-    <Label id="statusLabel" translation="[20,290]" width="600" height="30" text="" />
+    <Button id="verifyButton" translation="[220,230]" width="120" height="40" text="Verify" />
+    <Button id="saveButton" translation="[360,230]" width="120" height="40" text="Save" />
+    <Button id="cancelButton" translation="[500,230]" width="120" height="40" text="Cancel" />
+    <Label id="statusLabel" translation="[20,290]" width="760" height="30" text="" />
   </children>
 
   <script uri="pkg:/roku-plex/source/SettingsScene.brs" />
